@@ -10,7 +10,7 @@ setup(
     name='hellopypi_bfc',
     packages=['hellopypi_bfc'],
     description='Hello world for pypi',
-    version='0.1.0',
+    version='0.1.1',
     #url='http://github.com/example/hellopypi',
     author='bfc5288',
     keywords=['pip','helloworld']
