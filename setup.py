@@ -10,7 +10,9 @@ setup(
     name='hellopypi_bfc',
     packages=['hellopypi_bfc'],
     description='Hello world for pypi',
-    version='v0.1.2',
+    #version='v0.1.2',
+    use_scm_version = {
+        'write_to': 'scimma/client/_version.py'},
     #url='http://github.com/example/hellopypi',
     author='bfc5288',
     keywords=['pip','helloworld']
