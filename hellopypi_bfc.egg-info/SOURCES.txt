@@ -1,0 +1,8 @@
+README.md
+setup.cfg
+setup.py
+hellopypi_bfc/__init__.py
+hellopypi_bfc.egg-info/PKG-INFO
+hellopypi_bfc.egg-info/SOURCES.txt
+hellopypi_bfc.egg-info/dependency_links.txt
+hellopypi_bfc.egg-info/top_level.txt
