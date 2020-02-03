@@ -12,7 +12,7 @@ setup(
     description='Hello world for pypi',
     #version='v0.1.2',
     use_scm_version = {
-        'write_to': 'scimma/client/_version.py'},
+        'write_to': '/hellopypi_bfc/_version.py'},
     #url='http://github.com/example/hellopypi',
     author='bfc5288',
     keywords=['pip','helloworld']
