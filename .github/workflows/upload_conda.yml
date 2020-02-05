@@ -18,6 +18,11 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
+        conda install anaconda-client
+        conda init bash
+    - name: Activate conda env
+      run: |
+        conda activate base
     - name: Build and upload
       env:
         CONDA_USERNAME: ${{ secrets.CONDA_USER }}
