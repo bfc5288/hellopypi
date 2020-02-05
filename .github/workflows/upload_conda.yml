@@ -1,0 +1,30 @@
+name: Upload to Anaconda
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v2
+    - name: Set up Python
+      uses: actions/setup-python@v1
+      with:
+        python-version: '3.6'
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+    - name: Build and upload
+      env:
+        CONDA_USERNAME: ${{ secrets.CONDA_USER }}
+        CONDA_PASSWORD: ${{ secrets.CONDA_PW }}
+      run: |
+        conda config --set anaconda_upload yes
+      	python3 setup.py sdist bdist_wheel
+        anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
+	conda build .
+	anaconda logout
