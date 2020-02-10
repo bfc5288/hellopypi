@@ -27,10 +27,11 @@ jobs:
         conda create -n myenv
         conda init bash
         exec bash
-    - name: Activate conda env
-      run: |
+
+
         conda activate myenv
         conda install -y anaconda-client conda-build
+        echo success?
     - name: Build and upload
       env:
         CONDA_USERNAME: ${{ secrets.CONDA_USER }}
