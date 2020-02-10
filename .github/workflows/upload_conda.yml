@@ -24,20 +24,18 @@ jobs:
         #conda init bash
     - name: Create conda env
       run: |
-        conda create -n myenv
+        conda create -n myenv -y anaconda-client conda-build
         conda init bash
-        exec bash
-
-
+        . /home/runner/.bashrc
         conda activate myenv
-        conda install -y anaconda-client conda-build
         echo success?
     - name: Build and upload
       env:
         CONDA_USERNAME: ${{ secrets.CONDA_USER }}
         CONDA_PASSWORD: ${{ secrets.CONDA_PW }}
       run: |
-        cat /home/runner/.bashrc
+        . /home/runner/.bashrc
+        conda activate myenv
         conda config --set anaconda_upload yes
         anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
         conda build .
