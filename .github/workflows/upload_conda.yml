@@ -23,6 +23,7 @@ jobs:
         #conda install -y anaconda-client conda-build
         #conda init bash
     - name: Activate conda env
+      run: |
         conda create -n myenv
         conda activate myenv
         conda install -y anaconda-client conda-build        
