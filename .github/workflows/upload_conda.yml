@@ -20,10 +20,12 @@ jobs:
         python -m pip install --upgrade pip
         #python -m pip install anaconda-client
         #python -m pip install conda-build
-        conda install -y anaconda-client conda-build
+        #conda install -y anaconda-client conda-build
         #conda init bash
-        which anaconda
 #    - name: Activate conda env
+        conda create -n myenv
+        conda activate myenv
+        conda install -y anaconda-client conda-build        
       # run: |
       #   conda init bash
       #   conda activate base
