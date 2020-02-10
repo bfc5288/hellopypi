@@ -32,7 +32,7 @@ jobs:
         CONDA_PASSWORD: ${{ secrets.CONDA_PW }}
       run: |
         conda config --set anaconda_upload yes
-        #anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
+        anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
         conda build .
         #anaconda upload
         #anaconda logout
