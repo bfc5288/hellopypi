@@ -1,4 +1,4 @@
-name: Upload to Anaconda
+name: Upload to Anaconda, fresh
 
 on:
   push:
@@ -7,7 +7,9 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    container:
+      image: continuumio/miniconda
+    #runs-on: ubuntu-latest
 
     steps:
     - uses: actions/checkout@v2
@@ -17,14 +19,16 @@ jobs:
         python-version: '3.6'
     - name: Install dependencies
       run: |
-        python -m pip install --upgrade pip
-    - name: Build and upload
-      env:
-        CONDA_USERNAME: ${{ secrets.CONDA_USER }}
-        CONDA_PASSWORD: ${{ secrets.CONDA_PW }}
-      run: |
-        conda config --set anaconda_upload yes
-        conda install -y anaconda-client conda-build
-        anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
-        conda build .
-        anaconda logout
+        which conda
+        which anaconda
+    #     python -m pip install --upgrade pip
+    # - name: Build and upload
+    #   env:
+    #     CONDA_USERNAME: ${{ secrets.CONDA_USER }}
+    #     CONDA_PASSWORD: ${{ secrets.CONDA_PW }}
+    #   run: |
+    #     conda config --set anaconda_upload yes
+    #     conda install -y anaconda-client conda-build
+    #     anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
+    #     conda build .
+    #     anaconda logout
