@@ -22,23 +22,23 @@ jobs:
         #python -m pip install conda-build
         #conda install -y anaconda-client conda-build
         #conda init bash
-    - name: Activate conda env
+    - name: Create conda env
       run: |
         conda create -n myenv
         conda init bash
         exec bash
+    - name: Activate conda env
+      run: |
         conda activate myenv
-        conda install -y anaconda-client conda-build        
-      # run: |
-      #   conda init bash
-      #   conda activate base
+        conda install -y anaconda-client conda-build
     - name: Build and upload
       env:
         CONDA_USERNAME: ${{ secrets.CONDA_USER }}
         CONDA_PASSWORD: ${{ secrets.CONDA_PW }}
       run: |
+        cat /home/runner/.bashrc
         conda config --set anaconda_upload yes
         anaconda login --username $CONDA_USERNAME --password $CONDA_PASSWORD
         conda build .
         #anaconda upload
-        #anaconda logout
+        anaconda logout
