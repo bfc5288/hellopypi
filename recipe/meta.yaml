@@ -8,8 +8,9 @@ package:
   name: "{{ pack_name|lower }}"
 
   #version: {{ setup_data.get('use_scm_version') }}
-  #version: "{{ GIT_DESCRIBE_TAG }}"
+  version: {{ GIT_DESCRIBE_TAG }}
   #version: "{{ get_version() }}"
+  #version: {{ version }}
 
 source:
   #url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
