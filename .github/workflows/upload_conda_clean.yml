@@ -13,11 +13,7 @@ jobs:
 
 
     steps:
-    #- uses: actions/checkout@v2
-    #- name: Set up Python
-    #  uses: actions/setup-python@v1
-    #  with:
-    #    python-version: '3.7'
+    - uses: actions/checkout@v2
     - name: Install dependencies
       run: |
         conda install -y anaconda-client conda-build
@@ -25,7 +21,7 @@ jobs:
     - name: Update recipe
       run: |
         pwd
-        ls -al ..
+        ls -al
         python3 setup.py sdist
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
