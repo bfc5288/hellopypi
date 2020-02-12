@@ -6,7 +6,7 @@ package:
 
   name: "{{ pack_name|lower }}"
 
-  version: {{ setup_data.get('version') }}
+  version: {{ setup_data.get('use_scm_version') }}
 
 source:
   url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
@@ -20,6 +20,8 @@ requirements:
   host:
     - pip
     - python
+    - setuptools
+    - setuptools_scm
   run:
     - python
 
