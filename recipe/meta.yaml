@@ -2,18 +2,19 @@
 {% set pack_name = "hellopypi" %}
 #{% set setup_data = load_setup_py_data() %}
 #{% from setuptools_scm import get_version %}
-
+{% set version = GIT_DESCRIBE_TAG %}
 package:
 
   name: "{{ pack_name|lower }}"
 
   #version: {{ setup_data.get('use_scm_version') }}
-  version: {{ GIT_DESCRIBE_TAG }}
+  #version: {{ GIT_DESCRIBE_TAG }}
+
   #version: "{{ get_version() }}"
-  #version: {{ version }}
+  version: {{ version }}
 
 source:
-  #url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
+  url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
   sha256: da4f6f52f21ad1d809173020fd972b23e8ebfcdb1e7b77fbe1b93be2c2c77803
 
 build:
