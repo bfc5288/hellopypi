@@ -23,7 +23,6 @@ jobs:
         conda install -y setuptools
     - name: Update recipe
       run: |
-        export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
         python3 setup.py sdist
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
