@@ -22,9 +22,9 @@ jobs:
       run: |
         conda install -y anaconda-client conda-build
         conda install -y setuptools
-        conda update -y setuptools
     - name: Update recipe
       run: |
+        ls -al
         python3 setup.py sdist
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
