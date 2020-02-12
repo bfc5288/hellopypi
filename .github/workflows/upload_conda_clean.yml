@@ -9,7 +9,7 @@ jobs:
   Upload:
     runs-on: ubuntu-latest
     container:
-      image: continuumio/miniconda
+      image: continuumio/miniconda3
 
     steps:
     - uses: actions/checkout@v2
@@ -21,7 +21,7 @@ jobs:
       run: |
         conda install -y anaconda-client conda-build
         python3 -m pip install --upgrade pip
-        pip install setuptools wheel twine
+        python3 -m pip install setuptools wheel twine
     - name: Update recipe
       run: |
         export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
