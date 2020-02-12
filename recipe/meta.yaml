@@ -1,13 +1,15 @@
 {% set repo_name = "bfc5288" %}
 {% set pack_name = "hellopypi" %}
 {% set setup_data = load_setup_py_data() %}
+{% from setuptools_scm import get_version %}
 
 package:
 
   name: "{{ pack_name|lower }}"
 
   #version: {{ setup_data.get('use_scm_version') }}
-  version: "{{ GIT_DESCRIBE_TAG }}"
+  #version: "{{ GIT_DESCRIBE_TAG }}"
+  version: {{ get_version() }}
 
 source:
   url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
