@@ -23,7 +23,7 @@ jobs:
         pip install setuptools wheel twine
     - name: Update recipe
       run: |
-        export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/opt/python361/lib
+        export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
         python setup.py sdist bdist_wheel
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
