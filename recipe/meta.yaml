@@ -1,17 +1,20 @@
-{% set name = "hellopypi" %}
-{% set version = "1.1" %}
+{% set repo_name = "bfc5288" %}
+{% set pack_name = "hellopypi" %}
+{% set setup_data = load_setup_py_data() %}
 
 package:
-  name: "{{ name|lower }}"
-  version: "{{ version }}"
+
+  name: "{{ pack_name|lower }}"
+
+  version: {{ setup_data.get('version') }}
 
 source:
-  url: "https://pypi.io/packages/source/{{ name[0] }}/{{ name }}/{{ name }}-{{ version }}.tar.gz"
+  url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
   sha256: da4f6f52f21ad1d809173020fd972b23e8ebfcdb1e7b77fbe1b93be2c2c77803
 
 build:
   number: 0
-  script: "{{ PYTHON }} -m pip install . -vv"
+  script: python3 -m pip install . -vv"
 
 requirements:
   host:
