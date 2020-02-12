@@ -24,7 +24,7 @@ jobs:
     - name: Update recipe
       run: |
         export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
-        python setup.py sdist bdist_wheel
+        python3 setup.py sdist bdist_wheel
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
         ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') > update_hash.yml
