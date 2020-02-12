@@ -20,8 +20,7 @@ jobs:
     - name: Install dependencies
       run: |
         conda install -y anaconda-client conda-build
-        python3 -m pip install --upgrade pip
-        python3 -m pip install setuptools wheel twine
+        conda install -y setuptools wheel
     - name: Update recipe
       run: |
         export LD_LIBRARY_PATH=/lib:/usr/lib:/usr/local/lib
