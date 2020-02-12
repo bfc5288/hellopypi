@@ -19,9 +19,15 @@ jobs:
         python-version: '3.6'
     - name: Install dependencies
       run: |
-        which conda
         conda install -y anaconda-client conda-build
-        which anaconda
+        pip install setuptools wheel twine
+    - name: Update recipe
+      run: |
+        python setup.py sdist bdist_wheel
+        wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
+        chmod +x yq
+        ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') > update_hash.yml
+        conda render recipe/meta.yaml --append-file update_hash.yml
     - name: Build and upload
       env:
         CONDA_USERNAME: ${{ secrets.CONDA_USER }}
