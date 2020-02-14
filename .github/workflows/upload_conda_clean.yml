@@ -36,7 +36,7 @@ jobs:
         ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') >> update.yaml
         
         #wait for github tar to upload before accessing the url
-        sleep 30
+        sleep 90
     - name: Apply updated hash
       run: |
         #render the recipe file with the generated hash
