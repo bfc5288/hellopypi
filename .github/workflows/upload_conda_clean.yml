@@ -31,7 +31,7 @@ jobs:
         #prepend version environment variable
         fpath="recipe/meta.yaml"
         v_str=$(python setup.py --version)
-        line_str='{% set version = "v'${v_str}' %"}'
+        line_str='{% set version = "v'${v_str}'" %}'
         echo $line_str | cat - $fpath > temp && mv temp $fpath
         
         #render the recipe file with the generated hash
