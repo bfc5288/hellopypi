@@ -26,16 +26,16 @@ jobs:
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
         ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') >> update.yaml
-        ./yq n package.version $(python setup.py --version) >> update.yaml
+        #./yq n package.version $(python setup.py --version) >> update.yaml
         
         #prepend version environment variable
         fpath="recipe/meta.yaml"
         v_str=$(python setup.py --version)
-        line_str="{% set version = v"${v_str}" %}"
+        line_str='{% set version = "v'${v_str}' %"}'
         echo $line_str | cat - $fpath > temp && mv temp $fpath
         
         #render the recipe file with the generated hash
-        conda render recipe/meta.yaml --append-file update.yml
+        conda render recipe/meta.yaml --append-file update.yaml
 
     - name: Build and upload
       env:

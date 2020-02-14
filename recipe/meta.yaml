@@ -2,7 +2,7 @@
 {% set pack_name = "hellopypi" %}
 #{% set setup_data = load_setup_py_data() %}
 #{% from setuptools_scm import get_version %}
-{% set version = GIT_DESCRIBE_TAG %}
+#{% set version = GIT_DESCRIBE_TAG %}
 package:
 
   name: "{{ pack_name|lower }}"
@@ -12,7 +12,7 @@ package:
 
   #version: "{{ get_version() }}"
   version: {{ version }}
-  #hmm
+  
 source:
   url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
   sha256: da4f6f52f21ad1d809173020fd972b23e8ebfcdb1e7b77fbe1b93be2c2c77803
