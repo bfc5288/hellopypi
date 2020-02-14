@@ -18,23 +18,27 @@ jobs:
       run: |
         conda install -y anaconda-client conda-build
         conda install -y setuptools setuptools_scm
-    - name: Update recipe with version and hash
+    - name: Update recipe with version variable
       run: |
         #prepend version environment variable before writing files (preserves version of master)
         fpath="recipe/meta.yaml"
         v_str=$(python setup.py --version)
         line_str='{% set version = "v'${v_str}'" %}'
         echo $line_str | cat - $fpath > temp && mv temp $fpath
-
+    - name: Build package and generate hash
+      run: |
         #build the package
         python3 setup.py sdist
         
-        #use openssl to generate hash and yq to write updated hash and version to file
+        #use openssl to generate hash and yq to write updated hash to file
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
         chmod +x yq
         ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') >> update.yaml
-        #./yq n package.version $(python setup.py --version) >> update.yaml
-
+        
+        #wait for github tar to upload before accessing the url
+        #sleep 30
+    - name: Apply updated hash
+      run: |
         #render the recipe file with the generated hash
         conda render recipe/meta.yaml --append-file update.yaml
 
