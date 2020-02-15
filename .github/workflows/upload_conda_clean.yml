@@ -21,25 +21,27 @@ jobs:
     - name: Update recipe with version variable
       run: |
         #prepend version environment variable before writing files (preserves version of master)
-        fpath="recipe/meta.yml"
+        fpath="recipe/meta.yaml"
         v_str=$(python setup.py --version)
         line_str='{% set version = "v'${v_str}'" %}'
         echo $line_str | cat - $fpath > temp && mv temp $fpath
     - name: Build package and generate hash
       run: |
-	#build the package
-	python3 setup.py sdist
-        #use openssl to generate hash and yq to write updated hash to file
-	wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
-	chmod +x yq
-	./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') >> update.yaml
+        #build the package
+        python3 setup.py sdist
         
-        #wait for github tar to upload before accessing the url
-        sleep 90
+        #use openssl to generate hash and yq to write updated hash to file
+        wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
+        chmod +x yq
+        ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') >> update.yaml
+
     - name: Apply updated hash
+      env:
+        TEST_VAR: 'update.yaml'
       run: |
+        
         #render the recipe file with the generated hash
-        conda render recipe/meta.yml --append-file update.yaml
+        conda render recipe/meta.yaml --append-file $TEST_VAR
 
     - name: Build and upload
       env:
