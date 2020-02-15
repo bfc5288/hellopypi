@@ -26,9 +26,11 @@ jobs:
         line_str='{% set version = "v'${v_str}'" %}'
         echo $line_str | cat - $fpath > temp && mv temp $fpath
     - name: Build package and generate hash
+      env:
+        TEST_VAR: 'setup.py'
       run: |
         #build the package
-        python3 setup.py sdist
+        python3 $TEST_VAR sdist
         
         #use openssl to generate hash and yq to write updated hash to file
         wget https://github.com/mikefarah/yq/releases/download/3.1.0/yq_linux_amd64 -O yq
@@ -36,12 +38,9 @@ jobs:
         ./yq n source.sha256 $(openssl sha256 dist/*.tar.gz | awk '{print $2}') >> update.yaml
 
     - name: Apply updated hash
-      env:
-        TEST_VAR: 'update.yaml'
       run: |
-        
         #render the recipe file with the generated hash
-        conda render recipe/meta.yaml --append-file $TEST_VAR
+        conda render recipe/meta.yaml --append-file update.yaml
 
     - name: Build and upload
       env:
