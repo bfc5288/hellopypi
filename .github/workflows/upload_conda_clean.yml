@@ -21,7 +21,7 @@ jobs:
     - name: Update recipe with version variable
       run: |
         #prepend version environment variable before writing files (preserves version of master)
-        fpath="recipe/meta.yaml"
+        fpath="recipe/meta.yml"
         v_str=$(python setup.py --version)
         line_str='{% set version = "v'${v_str}'" %}'
         echo $line_str | cat - $fpath > temp && mv temp $fpath
@@ -39,7 +39,7 @@ jobs:
     - name: Apply updated hash
       run: |
         #render the recipe file with the generated hash
-        conda render recipe/meta.yaml --append-file update.yaml
+        conda render recipe/meta.yml --append-file update.yaml
 
     - name: Build and upload
       env:
