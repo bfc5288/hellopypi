@@ -35,10 +35,13 @@ jobs:
         RECIPE_PATH: 'recipe/meta.yaml'
         VERSION: $(python setup.py --version)
         #LINE_STR: '{% set version = "v'${VERSION}'" %}'
-        SOURCE_URL: "https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
+        #SOURCE_URL: "https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
 
       run: |
         LINE_STR='{% set version = "v'${VERSION}'" %}'
+        SOURCE_URL="https://pypi.io/packages/source/s/'${NAME}'/'${NAME}'-'${VERSION}'.tar.gz"
+        pip download $SOURCE_URL --no-deps --no-binary :all:
+
         #build the package
         python3 $TEST_VAR sdist
         
