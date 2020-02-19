@@ -34,10 +34,11 @@ jobs:
         NAME: 'scimma-client'
         RECIPE_PATH: 'recipe/meta.yaml'
         VERSION: $(python setup.py --version)
-        LINE_STR: '{% set version = "v'${VERSION}'" %}'
+        #LINE_STR: '{% set version = "v'${VERSION}'" %}'
         SOURCE_URL: "https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
 
       run: |
+        LINE_STR='{% set version = "v'${VERSION}'" %}'
         #build the package
         python3 $TEST_VAR sdist
         
