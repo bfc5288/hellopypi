@@ -33,11 +33,12 @@ jobs:
         #can't read source url from recipe, so generate it here:
         NAME: 'scimma-client'
         RECIPE_PATH: 'recipe/meta.yaml'
-        VERSION: $(python setup.py --version)
+        #VERSION: $(python setup.py --version)
         #LINE_STR: '{% set version = "v'${VERSION}'" %}'
         #SOURCE_URL: "https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
 
       run: |
+        VERSION=$(python setup.py --version)
         LINE_STR='{% set version = "v'${VERSION}'" %}'
         SOURCE_URL="https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
         echo $SOURCE_URL
