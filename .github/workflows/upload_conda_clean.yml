@@ -40,10 +40,10 @@ jobs:
       run: |
         VERSION=$(python setup.py --version)
         LINE_STR='{% set version = "v'${VERSION}'" %}'
-        SOURCE_URL="https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
-        echo $SOURCE_URL
-        echo 'HELLOOOOOOOOOOOO'
-        pip download $SOURCE_URL --no-deps --no-binary :all:
+        #SOURCE_URL="https://pypi.io/packages/source/s/${NAME}/${NAME}-${VERSION}.tar.gz"
+        #echo $SOURCE_URL
+        #echo 'HELLOOOOOOOOOOOO'
+        #pip download $SOURCE_URL --no-deps --no-binary :all:
 
         #build the package
         python3 $TEST_VAR sdist
@@ -56,8 +56,8 @@ jobs:
     - name: Apply updated hash
       run: |
         #render the recipe file with the generated hash
-        conda render recipe/meta.yaml --append-file update.yaml
-
+        #conda render recipe/meta.yaml --append-file update.yaml
+        conda render recipe/meta.yaml --clobber-file update.yaml -f recipe/meta.yaml
     - name: Build and upload
       env:
         CONDA_USERNAME: ${{ secrets.CONDA_USER }}
