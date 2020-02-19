@@ -28,6 +28,7 @@ jobs:
     - name: Build package and generate hash
       env:
         TEST_VAR: 'setup.py'
+        TEST_VERSION: $(python setup.py --version)
       run: |
         #build the package
         python3 $TEST_VAR sdist
