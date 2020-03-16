@@ -24,7 +24,7 @@ setup(
     use_scm_version = {
         'write_to': 'hellopypi_bfc/client/_version.py'},
     #url='http://github.com/example/hellopypi',
-    author='bfc5288',
+    author='bfc',
     keywords=['pip','helloworld']
     )
 
