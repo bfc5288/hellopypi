@@ -1,0 +1,42 @@
+{% set repo_name = "bfc5288" %}
+{% set pack_name = "hellopypi" %}
+#{% set setup_data = load_setup_py_data() %}
+#{% from setuptools_scm import get_version %}
+
+package:
+
+  name: "{{ pack_name|lower }}"
+
+  #version: {{ setup_data.get('use_scm_version') }}
+  #version: "{{ GIT_DESCRIBE_TAG }}"
+  #version: "{{ get_version() }}"
+
+source:
+  #url: "https://github.com/{{ repo_name }}/{{ pack_name }}/archive/{{ version }}.tar.gz"
+  sha256: da4f6f52f21ad1d809173020fd972b23e8ebfcdb1e7b77fbe1b93be2c2c77803
+
+build:
+  number: 0
+  script: python3 -m pip install . -vv"
+
+requirements:
+  host:
+    - pip
+    - python
+    - setuptools
+    - setuptools_scm
+  run:
+    - python
+
+about:
+  home: "The package home page"
+  license: UNKNOWN
+  license_family: OTHER
+  license_file: 
+  summary: "Trivial python package uploaded as test pypi test"
+  doc_url: 
+  dev_url: 
+
+extra:
+  recipe-maintainers:
+    - your-github-id-here

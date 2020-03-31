@@ -9,7 +9,6 @@ with open(os.path.join(this_dir, 'README.md'), 'rb') as f:
 setup(
     name='hellopypi_bfc',
     description='Hello world for pypi',
-
     packages=['hellopypi_bfc', 'hellopypi_bfc.client'],
     namespace_packages=['hellopypi_bfc'],
 
