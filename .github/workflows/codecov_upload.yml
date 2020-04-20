@@ -15,7 +15,7 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install coverage codecov
+        pip install coverage codecov pytest
     - name: Generate coverage file
       run: |
         coverage run -m pytest
