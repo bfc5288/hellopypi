@@ -1,6 +1,6 @@
 name: Upload to Codecov
 
-on: push
+on: [commit, pull_request]
 
 jobs:
   deploy:
@@ -29,3 +29,5 @@ jobs:
         flags: pytest # optional
         name: codecov-umbrella # optional
         fail_ci_if_error: true # optional (default = false)
+
+        
