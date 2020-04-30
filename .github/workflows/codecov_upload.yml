@@ -1,6 +1,6 @@
 name: Upload to Codecov
 
-on: [commit, pull_request]
+on: [push, pull_request]
 
 jobs:
   deploy:
