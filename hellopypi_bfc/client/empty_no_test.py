@@ -1,4 +1,3 @@
-
 def sample_func1():
     '''I'm just here to offer empty lines that aren't in pytest, to change the CodeCov report.
 
@@ -58,3 +57,17 @@ def sample_func3():
     content = 8
 
     return 0
+
+def more_untested_lines():
+    '''Another function to reduce code coverage.
+
+    '''
+
+    empty_list = [None] * 100
+    another_empty_list = [x for x in empty_list]
+
+    empty_list_func = lambda z: [None] * z
+
+    really_empty_list = empty_list_func(1000)
+
+    return -1
