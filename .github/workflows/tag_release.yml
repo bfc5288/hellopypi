@@ -20,7 +20,7 @@ jobs:
             -u $RELEASE_USER:$RELEASE_PW \            
             -X POST \
             -H "Accept: application/vnd.github.v3+json" \
-            'https://api.github.com/repos/bfc5288/hellopypi/releases' \
+            https://api.github.com/repos/bfc5288/hellopypi/releases \
             -d '{
                  "tag_name":"v3.2.0a2",
                  "name":"test release",
