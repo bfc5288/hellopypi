@@ -14,6 +14,35 @@ def wallet():
     return Wallet(20)
 
 
+@pytest.fixture(scope="session")
+def fixture_one():
+    return 'success one'
+
+@pytest.fixture(scope="session")
+def fixture_two():
+    return 'success two'
+
+
+# @pytest.fixture()
+# def fixture_arg():
+#     return 'success one'
+
+# @pytest.fixture()
+# def normal_arg():
+#     return 'string one'
+
+@pytest.fixture(params=[fixture_one, fixture_two])
+def fixture_arg(request):
+    return request.getfixturevalue(request.param)
+
+@pytest.mark.parametrize("normal_arg, fixture_arg", [("string_one", fixture_one),("string_two", fixture_two)])
+def test_nested_fixtures(normal_arg, fixture_arg):
+    assert "string" in normal_arg
+    assert fixture_arg == 'success one'
+
+
+
+
 def test_default_amount(default_wallet):
     assert default_wallet.balance == 0, 'Should be 0'
     
