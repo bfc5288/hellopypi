@@ -17,17 +17,23 @@ jobs:
         REPO_NAME: 'hellopypi'
         RELEASE_USER: ${{ secrets.RELEASE_USER }}
         RELEASE_PW: ${{ secrets.RELEASE_PW }}
-        CHANGELOG_URL: https://raw.githubusercontent.com/${scimma/hop-client/master/CHANGELOG.md
       run: |
+        CHANGELOG_URL='https://raw.githubusercontent.com/${ORG_NAME}/${REPO_NAME}/master/CHANGELOG.md'
+        generate_release_data() {
+        cat <<EOF
+        {
+        "tag_name":"$GITHUB_REF",
+        "name":"Test release",
+        "body":"description of release",
+        "draft": false,
+        "prerelease": true
+        }
+        EOF
+        }
+
         curl \
             -X POST \
             -u $RELEASE_USER:$RELEASE_PW \
             -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/${ORG_NAME}/{$REPO_NAME}/releases \
-            -d '{
-                 "tag_name":$GITHUB_REF,
-                 "name":"test release",
-                 "body":"description of release",
-                 "draft": true,
-                 "prerelease": true
-                 }'
+            -d "$(generate_release_data)"
