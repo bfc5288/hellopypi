@@ -19,10 +19,12 @@ jobs:
         RELEASE_PW: ${{ secrets.RELEASE_PW }}
       run: |
         CHANGELOG_URL='https://raw.githubusercontent.com/${ORG_NAME}/${REPO_NAME}/master/CHANGELOG.md'
+        TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
+
         generate_release_data() {
         cat <<EOF
         {
-        "tag_name":"$GITHUB_REF",
+        "tag_name":"$TAG_NAME",
         "name":"Test release",
         "body":"description of release",
         "draft": false,
