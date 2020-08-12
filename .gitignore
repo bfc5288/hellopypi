@@ -2,6 +2,7 @@ build/
 .eggs/
 tests/.eggs/
 *.egg-info/
+.eggs/
 dist/
 __pycache__/
 doc/_build/

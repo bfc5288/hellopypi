@@ -15,12 +15,17 @@ jobs:
     - name: Install dependencies
       run: |
         python -m pip install --upgrade pip
-        pip install coverage codecov pytest
-        python3 setup.py install
+        pip install coverage codecov pytest pytest-cov pytest-mock pytest-console-scripts
+        pip install .
     - name: Generate coverage file
+      env:
+        PACK_NAME: 'hellopypi_bfc'
       run: |
+        # these two lines work for hellopypi, but not scimma:
         coverage run -m pytest || true
         coverage xml
+        #pytest --cov-report term --cov-report xml # this line sometimes works for hellopypi, but gives 0% coverage for scimma
+        #python -m pytest --cov-report term --cov-report xml:coverage.xml --cov $PACK_NAME # this line works for scimma, but not hellopypi
     - name: Upload results to Codecov
       uses: codecov/codecov-action@v1
       with:
