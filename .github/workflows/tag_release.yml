@@ -13,17 +13,19 @@ jobs:
     - uses: actions/checkout@v2
     - name: Create release through REST API
       env:
+        ORG_NAME: 'bfc5288'
+        REPO_NAME: 'hellopypi'
         RELEASE_USER: ${{ secrets.RELEASE_USER }}
         RELEASE_PW: ${{ secrets.RELEASE_PW }}
-        RELEASE_URL: 'https://api.github.com/repos/bfc5288/hellopypi/releases'
+        CHANGELOG_URL: https://raw.githubusercontent.com/${scimma/hop-client/master/CHANGELOG.md
       run: |
         curl \
             -X POST \
             -u $RELEASE_USER:$RELEASE_PW \
             -H "Accept: application/vnd.github.v3+json" \
-            $RELEASE_URL \
+            https://api.github.com/repos/${ORG_NAME}/{$REPO_NAME}/releases \
             -d '{
-                 "tag_name":"v3.2.0a2",
+                 "tag_name":$GITHUB_REF,
                  "name":"test release",
                  "body":"description of release",
                  "draft": true,
