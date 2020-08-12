@@ -19,8 +19,11 @@ jobs:
         RELEASE_PW: ${{ secrets.RELEASE_PW }}
       run: |
         CHANGELOG_URL='https://raw.githubusercontent.com/${ORG_NAME}/${REPO_NAME}/master/CHANGELOG.md'
+        # extract the tagname string from the tagpath that triggered the workflow
         TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
 
+        # generate data for the cURL command beforehand, to ease the parsing of strings/variables;
+        # see https://stackoverflow.com/a/17032673/9161344
         generate_release_data() {
         cat <<EOF
         {
@@ -28,11 +31,13 @@ jobs:
         "name":"Test release",
         "body":"description of release",
         "draft": false,
-        "prerelease": true
+        "prerelease": false
         }
         EOF
         }
 
+        # curl the Github API with the release command.
+        # see https://docs.github.com/en/rest/reference/repos#releases
         curl \
             -X POST \
             -u $RELEASE_USER:$RELEASE_PW \
