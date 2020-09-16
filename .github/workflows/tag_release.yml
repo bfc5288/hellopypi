@@ -19,14 +19,19 @@ jobs:
         # extract the tagname string from the tagpath that triggered the workflow
         TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
 
+        # specify fields for the release
+        RELEASE_NAME="${TAG_NAME} release of ${GITHUB_REPOSITORY}"
+        RELEASE_DESC="This release contains the changes, additions, and removals described in the "\
+                     "${TAG_NAME} section of the changelog at ${CHANGELOG_URL}"
+
         # generate data for the cURL command beforehand, to ease the parsing of strings/variables;
         # see https://stackoverflow.com/a/17032673/9161344
         generate_release_data() {
         cat <<EOF
         {
         "tag_name":"$TAG_NAME",
-        "name":"Test release",
-        "body":"description of release",
+        "name":"${RELEASE_NAME}",
+        "body":"${RELEASE_DESC}",
         "draft": false,
         "prerelease": false
         }
