@@ -12,11 +12,10 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: Create release through REST API
-      env:
-        ORG_NAME: 'bfc5288'
-        REPO_NAME: 'hellopypi'
       run: |
-        CHANGELOG_URL='https://raw.githubusercontent.com/${ORG_NAME}/${REPO_NAME}/master/CHANGELOG.md'
+        # generate link changelog to parse later into the release description
+        CHANGELOG_URL='https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/master/CHANGELOG.md'
+        
         # extract the tagname string from the tagpath that triggered the workflow
         TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
 
