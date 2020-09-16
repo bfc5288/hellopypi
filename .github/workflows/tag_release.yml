@@ -14,7 +14,7 @@ jobs:
     - name: Create release through REST API
       run: |
         # generate link changelog to parse later into the release description
-        CHANGELOG_URL='https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/master/CHANGELOG.md'
+        CHANGELOG_URL="https://raw.githubusercontent.com/${GITHUB_REPOSITORY}/master/CHANGELOG.md"
         
         # extract the tagname string from the tagpath that triggered the workflow
         TAG_NAME=$(echo $GITHUB_REF | sed 's/refs\/tags\///')
