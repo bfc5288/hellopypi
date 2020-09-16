@@ -15,8 +15,6 @@ jobs:
       env:
         ORG_NAME: 'bfc5288'
         REPO_NAME: 'hellopypi'
-        RELEASE_USER: ${{ secrets.RELEASE_USER }}
-        RELEASE_PW: ${{ secrets.RELEASE_PW }}
       run: |
         CHANGELOG_URL='https://raw.githubusercontent.com/${ORG_NAME}/${REPO_NAME}/master/CHANGELOG.md'
         # extract the tagname string from the tagpath that triggered the workflow
@@ -42,6 +40,5 @@ jobs:
             -X POST \
             --header 'authorization: Bearer ${{ secrets.GITHUB_TOKEN }}' \
             -H "Accept: application/vnd.github.v3+json" \
-            https://api.github.com/repos/${ORG_NAME}/{$REPO_NAME}/releases \
+            https://api.github.com/repos/${GITHUB_REPOSITORY}/releases \
             -d "$(generate_release_data)"
-        #            -u $RELEASE_USER:$RELEASE_PW \
